@@ -1,0 +1,164 @@
+/* ===========================================================
+   연도의 책 — 연도별 베스트셀러 아카이브
+   design: 연감(Almanac) / 타임라인 모티프
+   =========================================================== */
+
+:root {
+  --ink: #16130F;
+  --ink-soft: #4A443C;
+  --paper: #F2ECDE;
+  --card: #FAF6EA;
+  --line: #DAD0B8;
+  --accent: #E2472F;
+  --accent-dark: #B5341F;
+  --gold: #B08A34;
+  --serif: "Noto Serif KR", serif;
+  --sans: "Pretendard", -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --max: 900px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.eyebrow-badge {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em;
+  background: var(--accent); color: #fff; padding: 3px 8px; border-radius: 2px;
+}
+h1, h2 { font-family: var(--serif); font-weight: 900; color: var(--ink); margin: 0; }
+.section { padding: 48px 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ---------- Header ---------- */
+.site-header { background: var(--ink); border-bottom: 3px solid var(--accent); position: sticky; top: 0; z-index: 50; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--paper); }
+.brand-mark {
+  font-family: var(--serif); font-weight: 900; font-size: 18px;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; border-radius: 2px;
+}
+.brand-text { font-family: var(--serif); font-weight: 700; font-size: 17px; }
+.site-nav ul { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
+.site-nav a { color: rgba(242,236,222,0.75); font-size: 13.5px; padding: 8px 12px; }
+.site-nav a:hover, .site-nav a.active { color: var(--paper); }
+
+/* ---------- Hero (index) ---------- */
+.hero { padding: 60px 0 30px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-size: clamp(30px, 4.5vw, 48px); line-height: 1.2; margin: 0 0 16px; }
+.hero-desc { color: var(--ink-soft); font-size: 15.5px; max-width: 56ch; }
+
+/* ---------- Timeline ---------- */
+.timeline { border-top: 1px solid var(--line); }
+.tl-row {
+  display: grid; grid-template-columns: 90px 1fr auto 24px; align-items: center; gap: 16px;
+  padding: 22px 4px; border-bottom: 1px solid var(--line); transition: background 0.15s;
+}
+.tl-row:hover { background: var(--card); }
+.tl-year { font-family: var(--serif); font-weight: 900; font-size: 32px; color: var(--accent); }
+.tl-mid { display: flex; flex-direction: column; gap: 4px; }
+.tl-keyword { font-size: 13px; color: var(--ink-soft); font-family: var(--mono); }
+.tl-book { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.tl-book em { font-style: normal; font-family: var(--sans); font-weight: 400; font-size: 13.5px; color: var(--ink-soft); margin-left: 6px; }
+.tl-badge { font-family: var(--mono); font-size: 10px; padding: 3px 7px; border-radius: 2px; }
+.tl-badge.provisional { background: var(--gold); color: #fff; }
+.tl-arrow { color: var(--ink-soft); font-size: 18px; }
+
+@media (max-width: 640px) {
+  .tl-row { grid-template-columns: 56px 1fr 20px; }
+  .tl-year { font-size: 22px; }
+  .tl-badge { display: none; }
+}
+
+/* ---------- Year hero ---------- */
+.year-hero { padding: 56px 0 16px; }
+.year-number { font-size: clamp(60px, 12vw, 140px); line-height: 0.9; color: var(--accent); letter-spacing: -0.02em; margin: 6px 0 20px; }
+.year-summary { font-size: 16px; color: var(--ink-soft); max-width: 60ch; margin: 0 0 12px; }
+.year-caveat {
+  font-family: var(--mono); font-size: 12px; color: var(--gold);
+  border-left: 3px solid var(--gold); padding: 8px 12px; background: rgba(176,138,52,0.08); max-width: 60ch;
+}
+.year-caveat.full { color: var(--ink-soft); border-left-color: var(--line); background: transparent; padding-left: 0; border-left: none; }
+.badge-full { background: var(--ink); color: var(--paper); }
+.book-cat {
+  font-family: var(--mono); font-size: 10.5px; color: var(--gold);
+  border: 1px solid var(--line); padding: 1px 6px; border-radius: 2px; margin-left: 6px;
+}
+
+/* ---------- Book list ---------- */
+.book-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.book-row { display: grid; grid-template-columns: 56px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.book-rank { font-family: var(--serif); font-weight: 900; font-size: 34px; color: var(--ink); opacity: 0.15; }
+.book-title { font-family: var(--serif); font-size: 20px; font-weight: 700; margin: 0 0 2px; }
+.book-author { font-family: var(--sans); font-size: 13.5px; font-weight: 400; color: var(--ink-soft); margin-left: 6px; }
+.book-pub { font-family: var(--mono); font-size: 12px; color: var(--gold); margin: 2px 0 8px; }
+.book-note { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+/* ---------- Year nav ---------- */
+.year-nav { display: flex; justify-content: space-between; padding-top: 0; }
+.year-nav-link {
+  font-family: var(--mono); font-size: 13.5px; padding: 10px 16px; border: 1px solid var(--ink);
+  border-radius: 2px; color: var(--ink);
+}
+.year-nav-link:hover { background: var(--ink); color: var(--paper); }
+.year-nav-right { margin-left: auto; }
+
+/* ---------- Note ---------- */
+.note-section { padding-top: 0; }
+.note-text { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 18px; }
+
+/* ---------- Narrow (about/contact/privacy/terms) ---------- */
+.narrow { max-width: 680px; padding: 60px 24px; }
+.narrow h1 { font-size: 28px; margin-bottom: 16px; }
+.narrow h2 { font-size: 17px; margin: 28px 0 8px; color: var(--accent); font-family: var(--serif); }
+.body-text { font-size: 15px; color: var(--ink-soft); margin: 0 0 12px; }
+.body-text.small { font-size: 13px; }
+.body-text a { color: var(--accent); text-decoration: underline; }
+.contact-box { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); padding: 16px 18px; margin: 18px 0; }
+.contact-label { font-family: var(--mono); font-size: 11.5px; color: var(--gold); text-transform: uppercase; }
+.contact-email { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+
+/* ---------- Ad slot ---------- */
+.ad-slot { max-width: var(--max); margin: 0 auto; padding: 0 24px 36px; }
+.ad-slot ins { min-height: 90px; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--ink); color: rgba(242,236,222,0.8); margin-top: 40px; }
+.footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 32px 24px 18px; }
+.footer-brand { display: flex; gap: 12px; }
+.footer-title { font-family: var(--serif); font-weight: 700; color: var(--paper); margin: 0 0 4px; }
+.footer-tagline { font-size: 12.5px; margin: 0; color: rgba(242,236,222,0.55); }
+.footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(242,236,222,0.7); }
+.footer-links a:hover { color: var(--paper); }
+.footer-bottom { border-top: 1px solid rgba(242,236,222,0.15); padding: 14px 24px 26px; font-family: var(--mono); font-size: 10.5px; color: rgba(242,236,222,0.5); }
+
+/* ---------- Cookie banner ---------- */
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--ink); color: var(--paper);
+  padding: 16px 24px; display: none; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  border-top: 3px solid var(--accent);
+}
+.cookie-banner.show { display: flex; }
+.cookie-banner p { margin: 0; font-size: 13.5px; max-width: 60ch; }
+.cookie-banner a { text-decoration: underline; }
+.cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.btn { font-family: var(--sans); font-weight: 600; font-size: 13px; padding: 9px 16px; border-radius: 2px; border: 1.5px solid transparent; cursor: pointer; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-ghost { background: transparent; border-color: var(--paper); color: var(--paper); }
